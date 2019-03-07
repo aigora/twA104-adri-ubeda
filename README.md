@@ -1,10 +1,10 @@
-# Título del trabajo
+# Juego del ahorcado
 
-Descripción breve del proyecto a realizar (2-3 frases).
+Un modelo del famoso juego del ahorcado, incluyendo leds para verificar los fallos y aciertos.
 
 ## Integrantes del equipo
 
-Nombres, apellidos, y usuario GitHub de los integrantes del equipo.
+Guillermo Úbeda Romero y Adrián Bedmar Juanas. guillermouberomero
 
 ## Objetivos del trabajo
 
