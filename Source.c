@@ -3,7 +3,7 @@
 int main() {
 	int a, b, suma;
 	float c, d;
-	char e, f;
+	char e, f,t;
 	
 	printf("Introduce 2 números enteros");
 	scanf_s("%d%d",&a,&b);
