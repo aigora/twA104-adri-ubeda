@@ -3,37 +3,95 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>               //strlen() y strcmp()
-#include<conio.h>
+#include<conio.h>                //
+
+/*Direcciones del teclado */
+#define ARRIBA 72+256
+#define ABAJO 80+256
+#define INTRO 13
 
 #define MAX_STRING 20            //Longitud máxima de la cadena inicial.
 #define chances 6                //Número de intentos, en el ahorcado clásico suelen ser 6. Se puede cambiar aquí.
 
 /* PROTOTIPOS */
-void guiones(char*);
+void guiones(int);
 void historial(char letra,char* palabra, char* vector,int largo, int* flag);
 
 int main(void) {
-	
-	int  largo;               //Guarda la longitud de la palabra.
-    char buffer[MAX_STRING];  //Cadena inicial (buffer) que será sustituida por una mas eficiente con declaración dinámica de memoria.
-    char *palabra,letra;      //Cadena de la palabra y la letra introducida por el usuario.
-    int  intentos=chances;    //Numero de intentos.
-    int  flag=0;              //Flag de control, nos la devuelve la función, útil para hardware.
+		int intro=0,gamemode=0;
+printf("Bienvenido al juego del ahorcado.\n\n");
+printf("Vas a acceder al menu del juego.\nPor favor utilice las flechas arriba y abajo para seleccionar el modo de juego.");
+system("pause>>null \n\n");
+ system("cls"); /*LIMPIAMOS LA PANTALLA*/
 
+	menu0();
+while(intro==0){
+	
+	int tecla;
+	tecla=getch();
+ 
+	if(tecla==224||tecla==0){
+	tecla=256 + getch();
+    }
+    system("cls"); /*LIMPIAMOS LA PANTALLA*/
+    switch(tecla){
+    	case ARRIBA: gamemode=0;break;
+        case ABAJO:  gamemode=1;break;
+        case INTRO:  intro=1;break;
+	}
+
+	if(gamemode==0){
+	menu0();
+	} 
+	if(gamemode==1){
+    menu1();
+    }
+}
+system("cls"); /*LIMPIAMOS LA PANTALLA*/
+
+
+/*Fin del menu*/
+
+int  largo;               //Guarda la longitud de la palabra.
+char *palabra,letra;      //Cadena de la palabra y la letra introducida por el usuario.
+int  intentos=chances;    //Numero de intentos.
+int  flag=0;              //Flag de control, nos la devuelve la función, útil para hardware.
     
+if(gamemode==0) //Un Jugador, es decir, se tiene que elegir la palabra aleatoriamente.
+{
+	printf("En mantenimiento sorry");
+}
+
+
+if(gamemode==1) //Dos Jugadores, es decir, se tiene que pedir la palabra por teclado.
+{
+	
+    char buffer[MAX_STRING];  //Cadena inicial (buffer) que será sustituida por una mas eficiente con declaración dinámica de memoria.
+    
+   
+
+
 
 /*  Introducir la palabra y a continuación asignarla a un espacio asignado dinámicamente. */
-   
+
    printf("%s: \n","Ingrese palabra: ");
     fgets(buffer,MAX_STRING,stdin);
 	largo=strlen(buffer);
-	    palabra = (char*)malloc(sizeof(char)*(largo+1)); 
-        if (palabra==NULL) printf("No se ha podido reservar la memoria.");
-        else strcpy(palabra,buffer);
-        buffer[0]='\0';  
-		//eliminamos la primera entrada.                                                   //eliminamos la primera entrada.
+	palabra = (char*)malloc(sizeof(char)*(largo+1)); 
+    if (palabra==NULL) printf("No se ha podido reservar la memoria.");
+    else strcpy(palabra,buffer);
+    buffer[0]='\0';                                                  //eliminamos la primera entrada.
+    
+    /*Convertidor a mayusculas*/
+	int i; 
+   for(i=0;i<largo;i++){
+   if(*(palabra+i)>=97) *(palabra+i)=*(palabra+i)-32; 
+    }
+   
    //printf("la palabra introducida es: %s\n",palabra);                             //check.
-		guiones(palabra);
+	guiones(largo);
+		
+}//Fin de codigo exclusivo para Dos Jugadores.
 
 //Inicializamos el vector historial que es del mismo tamaño que el de la palabra. De forma dinamica con un puntero.
    char *vector;
@@ -62,7 +120,7 @@ if(letra>=97) letra=letra-32;
 historial(letra, palabra, vector, largo, &flag);
 //printf("%s\n",palabra);                                                      //CHECKS
 //printf("%s\n",vector);                                                       //
-   
+
 if(flag==0)
 {
 	intentos--;
@@ -83,13 +141,30 @@ if(flag==0)
 system("pause");
 return 0;   
 }
+void menu0()
+{
+printf("******************************\n");
+printf("**                          **\n");
+printf("**  >    Un Jugador    <    **\n");
+printf("**      Dos Jugadores       **\n");
+printf("**                          **\n");
+printf("******************************\n");
+}
+void menu1()
+{
+printf("******************************\n");
+printf("**                          **\n");
+printf("**       Un Jugador         **\n");
+printf("**  >   Dos Jugadores  <    **\n");
+printf("**                          **\n");
+printf("******************************\n");
+}
 
-void guiones(char*p) {
+void guiones(int largo) {
 	int i = 0;                      //Pasamos la dirección de memoria del primer miembro de la cadena.
-	while (*(p + i) != '\0') {
-		if (*(p + i) != ' ') printf("_ ");
-		else printf("  ");
-		i++;
+	for(i=0;i<largo-1;i++) {
+	 printf("_ ");
+
 	}
 	printf("\n\n");
 }
@@ -123,7 +198,7 @@ void historial(char letra,char *palabra, char* vector,int largo, int* flag){
 	{
         printf("%c ", *(vector + i)); 
     }
-    
+
     //comprobar si hemos ganado y final del juego.
     int final=1;
     for(j=0;j<largo-1;j++){
@@ -137,9 +212,6 @@ void historial(char letra,char *palabra, char* vector,int largo, int* flag){
 
     return;
 }
-
-
-
 
 	
 	
