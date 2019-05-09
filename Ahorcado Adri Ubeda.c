@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS  //Evitar la sintaxis de la versiÛn.
+#define _CRT_SECURE_NO_WARNINGS  //Evitar la sintaxis de la versi√≥n.
 
 #include<stdio.h>
 #include<stdlib.h>
@@ -10,12 +10,14 @@
 #define ABAJO 80+256
 #define INTRO 13
 
-#define MAX_STRING 20            //Longitud m·xima de la cadena inicial.
-#define chances 6                //N˙mero de intentos, en el ahorcado cl·sico suelen ser 6. Se puede cambiar aquÌ.
+#define MAX_STRING 20            //Longitud m√°xima de la cadena inicial.
+#define chances 6                //N√∫mero de intentos, en el ahorcado cl√°sico suelen ser 6. Se puede cambiar aqu√≠.
 
 /* PROTOTIPOS */
 void guiones(int);
 void historial(char letra,char* palabra, char* vector,int largo, int* flag);
+void menu0();
+void menu1();
 
 int main(void) {
 		int intro=0,gamemode=0;
@@ -28,10 +30,10 @@ system("pause>>null \n\n");
 while(intro==0){
 	
 	int tecla;
-	tecla=getch();
+	tecla=getch(); //en alguna version necesita _getch en vez de getch
  
 	if(tecla==224||tecla==0){
-	tecla=256 + getch();
+	tecla=256 + getch(); //_getch
     }
     system("cls"); /*LIMPIAMOS LA PANTALLA*/
     switch(tecla){
@@ -55,7 +57,7 @@ system("cls"); /*LIMPIAMOS LA PANTALLA*/
 int  largo;               //Guarda la longitud de la palabra.
 char *palabra,letra;      //Cadena de la palabra y la letra introducida por el usuario.
 int  intentos=chances;    //Numero de intentos.
-int  flag=0;              //Flag de control, nos la devuelve la funciÛn, ˙til para hardware.
+int  flag=0;              //Flag de control, nos la devuelve la funci√≥n, √∫til para hardware.
     
 if(gamemode==0) //Un Jugador, es decir, se tiene que elegir la palabra aleatoriamente.
 {
@@ -66,13 +68,13 @@ if(gamemode==0) //Un Jugador, es decir, se tiene que elegir la palabra aleatoria
 if(gamemode==1) //Dos Jugadores, es decir, se tiene que pedir la palabra por teclado.
 {
 	
-    char buffer[MAX_STRING];  //Cadena inicial (buffer) que ser· sustituida por una mas eficiente con declaraciÛn din·mica de memoria.
+    char buffer[MAX_STRING];  //Cadena inicial (buffer) que ser√° sustituida por una mas eficiente con declaraci√≥n din√°mica de memoria.
     
    
 
 
 
-/*  Introducir la palabra y a continuaciÛn asignarla a un espacio asignado din·micamente. */
+/*  Introducir la palabra y a continuaci√≥n asignarla a un espacio asignado din√°micamente. */
 
    printf("%s: \n","Ingrese palabra: ");
     fgets(buffer,MAX_STRING,stdin);
@@ -93,7 +95,7 @@ if(gamemode==1) //Dos Jugadores, es decir, se tiene que pedir la palabra por tec
 		
 }//Fin de codigo exclusivo para Dos Jugadores.
 
-//Inicializamos el vector historial que es del mismo tamaÒo que el de la palabra. De forma dinamica con un puntero.
+//Inicializamos el vector historial que es del mismo tama√±o que el de la palabra. De forma dinamica con un puntero.
    char *vector;
    vector = (char *)malloc(largo);
    if (vector==NULL) printf("No se ha podido reservar la memoria.");
@@ -104,7 +106,7 @@ if(gamemode==1) //Dos Jugadores, es decir, se tiene que pedir la palabra por tec
 
 while(flag==0){ 
 
-/* IntroducciÛn de la letra por el usuario */                
+/* Introducci√≥n de la letra por el usuario */                
 printf("Introduzca una letra.\n");                            
 scanf("%c",&letra);  
 getchar();                                             
@@ -116,7 +118,7 @@ getchar();
 //transformamos todas las letras a mayusculas                 
 if(letra>=97) letra=letra-32;                                 
 
-/*Comprobar si la letra introducida est· en la palabra y completar los huecos*/
+/*Comprobar si la letra introducida est√° en la palabra y completar los huecos*/
 historial(letra, palabra, vector, largo, &flag);
 //printf("%s\n",palabra);                                                      //CHECKS
 //printf("%s\n",vector);                                                       //
@@ -161,7 +163,7 @@ printf("******************************\n");
 }
 
 void guiones(int largo) {
-	int i = 0;                      //Pasamos la direcciÛn de memoria del primer miembro de la cadena.
+	int i = 0;                      //Pasamos la direcci√≥n de memoria del primer miembro de la cadena.
 	for(i=0;i<largo-1;i++) {
 	 printf("_ ");
 
@@ -174,8 +176,8 @@ void historial(char letra,char *palabra, char* vector,int largo, int* flag){
 	for(i=0;i<largo-1;i++){
 		if(letra==*(palabra+i)){
 			  /*
-               Si la letra introducida por el usuario est· en la palabra, 
-               se sustituir· por ella en el vector y se cambiara el valor 
+               Si la letra introducida por el usuario est√° en la palabra, 
+               se sustituir√° por ella en el vector y se cambiara el valor 
                de la bandera.
              */
             *(vector + i) = letra;
@@ -184,12 +186,12 @@ void historial(char letra,char *palabra, char* vector,int largo, int* flag){
             else
         {
             /*
-              Se pondr· un '_' en cada emplazamiento vacio.
+              Se pondr√° un '_' en cada emplazamiento vacio.
             */
 
             /* To identify letters in the array */
             if(*(vector + i) >= 65 && *(vector + i) <= 90 ) ; // NO poner un '_' si existe una letra en ese espacio.
-            else *(vector + i) = '_'; // para el resto sÌ.
+            else *(vector + i) = '_'; // para el resto s√≠.
         }
     }
 
