@@ -3,17 +3,19 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>               //strlen() y strcmp()
-#include<conio.h>                //
+#include<conio.h>                //introduce _getch
 
 /*Direcciones del teclado */
 #define ARRIBA 72+256
 #define ABAJO 80+256
 #define INTRO 13
 
+#define NUM_PALABRAS 4           //Numero de palabras (tiene que ser una menos)
 #define MAX_STRING 20            //Longitud máxima de la cadena inicial.
-#define chances 6                //Número de intentos, en el ahorcado clásico suelen ser 6. Se puede cambiar aquí.
+#define NUM_INTENTOS 5           //Número de intentos, en el ahorcado clásico suelen ser 6. Se puede cambiar aquí.
 
 /* PROTOTIPOS */
+void titulo();
 void guiones(int);
 void historial(char letra,char* palabra, char* vector,int largo, int* flag);
 void menu0();
@@ -101,6 +103,34 @@ if(gamemode==1) //Dos Jugadores, es decir, se tiene que pedir la palabra por tec
    if (vector==NULL) printf("No se ha podido reservar la memoria.");
    *(vector+(largo-1))='\0';
 
+char *ahorcado[] = {
+					 "|=====|\n"
+					 "      |\n"
+					 "      |\n"
+					 "      |\n"
+					 "     ===\n",
+					 "|=====|\n"
+					 "O     |\n"
+					 "      |\n"
+					 "      |\n"
+					 "     ===\n",
+					 " |=====|\n"
+					 " O     |\n"
+					 "-|-    |\n"
+					 "       |\n"
+					 "      ===\n",
+					 " |=====|\n"
+					 " O     |\n"
+					 "-|-    |\n"
+					 " |     |\n"
+					 "      ===\n",
+					 " |======|\n"
+					 " O      |\n"
+					 "-|-     |\n"
+					"/ \\     |\n"
+					 "       ===\n"
+
+	};	
 
 //bucle del juego*****
 
@@ -143,6 +173,27 @@ if(flag==0)
 system("pause");
 return 0;   
 }
+
+void titulo() {
+	/*  Logo en ascii  */
+	printf("\n\n\n");
+	printf("     \333\333\333       \333\333\260 \333\333   \260\333\333\333\333   \333\333\337\333\333\333   \334\333\333\333\334    \334\334\334      \261\333\333\333\333\333\334  \260\333\333\333\333\333  \n");
+	printf("    \260\333\333\333\333\334    \261\333\333\260 \333\333\260\260\333\333\260  \333\333\260\261\333\333 \260 \333\333\260\260\333\333\337 \337\333  \260\333\333\333\333\334    \260\333\333\337 \333\333\333\260\333\333\260  \333\333\260\n");
+	printf("    \260\333\333  \337\333\334  \260\333\333\337\337\333\333\260\260\333\333\260  \333\333\260\261\333\333 \260\334\333 \260\260\261\333    \334 \260\333\333  \337\333\334   \260\333    \333\260\333\333\260  \333\333\260\n");
+	printf("    \260\333\333\334\334\334\334\333\333 \260\261\333 \260\333\333 \260\333\333   \333\333\260\260\333\333\337\337\333\334  \260\261\261\334 \334\333\333\260\260\333\333\334\334\334\334\333\333 \260\261\333\334   \333\260\333\333   \333\333\260\n");
+	printf("     \261\333   \261\333\333\260\260\261\333\260\260\333\333\261\260 \333\333\333\333\261\260\260\260\333\333\261 \260\333\333\260\260 \261\333\333\333\337 \260 \261\333   \261\333\333\260\260\260\333\333\333\333\261 \260 \333\333\333\333\261\260\260\n");
+	printf("     \260\260   \261\260\333\260 \260 \260\260\260\260\260\260 \260\260\260\260\260\260 \260 \260\261 \260\260\261\260\260 \260\260 \260  \260 \260\260   \261\260\333\260 \260\260\261  \260 \260 \260\260\260\260\260\260 \n");
+	printf("      \260   \260\260 \260 \260 \260\260\260 \260  \260 \260 \260\260   \260\260 \260 \260\260  \260  \260     \260   \260\260 \260 \260 \260  \260   \260 \260 \260\260 \n");
+	printf("      \260   \260    \260  \260\260 \260\260 \260 \260 \260    \260\260   \260 \260          \260   \260    \260 \260  \260 \260 \260 \260 \260  \n");
+	printf("          \260  \260 \260  \260  \260    \260 \260     \260     \260 \260            \260  \260   \260        \260 \260  \n");
+	printf("                                        \260                   \260               \n\n");
+	printf("\n\n                Developed by Adri%cn Bedmar y Guillermo %cbeda.", 160, 233);
+
+
+	system("pause>>null \n\n"); //Paramos el programa.sin el mensaje.
+	system("cls"); /*LIMPIAMOS LA PANTALLA*/
+}
+
 void menu0()
 {
 printf("******************************\n");
