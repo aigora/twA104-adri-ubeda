@@ -19,19 +19,20 @@ Contenido:
 - Dibujo del ahorcado por fases (en función del numero de errores imprime una u otra secuencia de caracteres).
 
 Funcionamiento (linea compiladora.)
-[...]
-[...]En la parte cooperativa el usuario 1 introduce una palabra la cual se traslada a un vector con asignación dinamica
-de memoria y se borra el anterior vector para dejar esa memoria libre.
-A continuación con la función GUIONES se generara un vector de la misma longitud que solo incluirá guiones a modo de
-pista.
-Inicializamos un vector con asignación dinamica de memoria que actualizará su contenido a medida que el usuario va 
+- En el modo un jugador, se selecciona de forma aleatoria una palabra de la batería, y se guarda mediante asignación dinámica de memoria en una cadena llamada PALABRA.
+- En la parte cooperativa el usuario 1 introduce una palabra la cual se traslada a una cadena con asignación dinamica de memoria y se borra el anterior vector para dejar esa memoria libre.
+Ahora, se escoja el modo que se escoja, la palabra elegida está guardada en la cadena PALABRA.
+A continuación con la función GUIONES se generara una cadena de la misma longitud que solo incluirá guiones a modo de pista.
+
+Inicializamos una cadena llamada VECTOR con asignación dinamica de memoria que actualizará su contenido a medida que el usuario va 
 introduciendo letras a traves de un bucle, las cuales se convierten automaticamente en Mayúsculas y además descarta 
 los carácteres no válidos.
+
 El vector se llena con el objetivo de formar una cadena igual a la introducida al principio, y nos sirve para mostrar
 al usuario las letras que lleva acertadas y los huecos que quedan por adivinar. Esto ocurre en la función HISTORIAL,
 en la que pasamos como parametros la letra que introduce el usuario, el puntero al inicio de la cadena PALABRA, que
 es la introducida al principio, el puntero al inicio de la cadena VECTOR, la longitud de la palabra y la dirección de
-memoria de un flag tipo entero.
+memoria de un flag tipo entero (que se usa para el arduino), y el numero de intentos.
 La función se limita a sustituir la letra por su espacio en el vector si coincide y un guión si no y permite que sepamos
 si hemos fallado o acertado gracias al flag. La función no retorna nada porque es de tipo de paso por referencia.
 Para saber si hemos ganado compara una vez los caracteres de cada cadena y si coinciden sale del programa con un mensaje
