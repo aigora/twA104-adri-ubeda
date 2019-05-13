@@ -15,11 +15,12 @@
 #define NUM_INTENTOS 5           //Número de intentos, en el ahorcado clásico suelen ser 6. Se puede cambiar aquí.
 
 /*     PROTOTIPOS      */
-void titulo();
-void menu0();
-void menu1();
-void guiones(int);
-void historial(char letra, char* palabra, char* vector, int largo, int* flag, int intentos);
+
+void titulo();                   //Titulo principal en ascii
+void menu0();                    //menú seleccionando 1 jugador
+void menu1();                    //menú seleccionando 2 jugadores
+void guiones(int);               //Pista inicial.
+void historial(char letra, char* palabra, char* vector, int largo, int* flag, int intentos);     //Funcion iterativa que rellena la palabra.
 
 int main(void) {
 	titulo();
@@ -27,8 +28,8 @@ int main(void) {
 	int intro = 0, gamemode = 0;
 	printf("Bienvenido al juego del ahorcado.\n\n");
 	printf("En este trepidante juego tendras que adivinar una palabra antes de que cuelguen al ahorcado.\n\n");
-	printf("Vas a acceder al menu del juego.\nPor favor utilice las flechas arriba y abajo para seleccionar el modo de juego.");
-	system("pause>>null \n\n"); //Paramos el programa.
+	printf("Vas a acceder al menu del juego.\n\nPor favor utilice las flechas ARRIBA y ABAJO para seleccionar el modo de juego.");
+	system("pause>>null \n\n"); //Paramos el programa sin mensaje.
 	system("cls"); /*LIMPIAMOS LA PANTALLA*/
 
 	menu0();
@@ -59,10 +60,10 @@ int main(void) {
 
 	/*Fin del menu*/
 
-	int  largo;                    //Guarda la longitud de la palabra.
-	char *palabra = NULL, letra;           //Cadena de la palabra y la letra introducida por el usuario.
-	int  intentos = 0;    //Numero de intentos.
-	int  flag = 0;                   //Flag de control, nos la devuelve la función, útil para hardware.
+	int  largo;                                          //Guarda la longitud de la palabra.
+	char *palabra = NULL, letra;                         //Cadena de la palabra y la letra introducida por el usuario.
+	int  intentos = 0;                                   //Numero de intentos.
+	int  flag = 0;                                       //Flag de control, nos la devuelve la función, útil para hardware.
 
 	if (gamemode == 0) //Un Jugador, es decir, se tiene que elegir la palabra aleatoriamente.
 	{
@@ -70,7 +71,8 @@ int main(void) {
 		srand(time(NULL)); //cambiar la seed de aleatoriedad.
 		char *bateria[] = { "CAMION","PUENTE","COCODRILO","SAPO","SOMBRERO","DELEGADO","HELADO","LATA","PELOTA","PIMIENTO","AGUA",
 		                    "CHOCOLATE","HIPOPOTAMO","APROBAR","TRABAJO","INFORMATICA"};
-		int aleatorio = rand() % ((NUM_PALABRAS-1) + 1); //ESTRUCTURA RARA PARA QUE COJA 0 1 2 3 4 y no 1 2 3 4 5
+		int aleatorio = rand() % ((NUM_PALABRAS-1) + 1); 
+		//ESTRUCTURA RARA PARA QUE genere entre 0 1 2 3 4 y no entre 1 2 3 4 5 (en el caso de 5)
 
 		largo = strlen(bateria[aleatorio]) + 1;
 		palabra = (char*)calloc(largo, sizeof(char));
@@ -81,9 +83,8 @@ int main(void) {
 		}
 
 		else strcpy(palabra, bateria[aleatorio]);
-		//largo = strlen(palabra) + 1;
 		printf("Una palabra ha sido escogida. Buena Suerte!");
-		// printf("la palabra introducida es: %s\n",bateria[aleatorio]);//check.
+		// printf("la palabra introducida es: %s\n",bateria[aleatorio]);  //check.
 	}
 
 
@@ -113,15 +114,16 @@ int main(void) {
 				*(palabra + i) = *(palabra + i) - 32;
 		}
 		printf("La palabra ya ha sido introducida por el Jugador 1. Buena suerte!.\n\n");
-		//printf("%d",strlen(palabra));
+		
+		//printf("%d",strlen(palabra));                                 //check
 	}//Fin de codigo exclusivo para Dos Jugadores.
 
 	guiones(largo);
 
 	//Inicializamos el vector historial que es del mismo tamaño que el de la palabra. De forma dinamica con un puntero.
 	char *vector;
-	//vector = (char *)malloc(largo);
-	vector = (char*)calloc(largo, sizeof(char));
+	//vector = (char *)malloc(largo);                                   //Vector relleno de basura.
+	vector = (char*)calloc(largo, sizeof(char));                        //Vector vacio.
 	if (vector == NULL) {
 		printf("No se ha podido reservar la memoria.");
 		exit(1);
@@ -131,27 +133,27 @@ int main(void) {
 
 	char *ahorcado[] = {
 	                 " ",
-					 "HAS FALLADO!!                                                         |=====|\n"
+					 "                                                                      |=====|\n"
 					 "                                                                            |\n"
 					 "                                                                            |\n"
 					 "                                                                            |\n"
 					 "                                                                           ===\n",
-					 "HAS FALLADO OTRA VEZ!!                                                |=====|\n"
+					 "                                                                      |=====|\n"
 					 "                                                                      O     |\n"
 					 "                                                                            |\n"
 					 "                                                                            |\n"
 					 "                                                                           ===\n",
-					 "HAS FALLADO OTRA VEZ!!                                                |=====|\n"
+					 "                                                                      |=====|\n"
 					 "                                                                      O     |\n"
 					 "                                                                      |     |\n"
 					 "                                                                            |\n"
 					 "                                                                           ===\n",
-					 "HAS FALLADO OTRA VEZ!!                                                |=====|\n"
+					 "                                                                      |=====|\n"
 					 "                                                                      O     |\n"
 					 "                                                                     -|-    |\n"
 					 "                                                                            |\n"
 					 "                                                                           ===\n",
-					 "HAS FALLADO OTRA VEZ!!                                                |=====|\n"
+					 "                                                                      |=====|\n"
 					 "                                                                      O     |\n"
 					 "                                                                     -|-    |\n"
 					"                                                                     / \\    |\n"
@@ -173,7 +175,7 @@ int main(void) {
 		getchar();
 		
 
-		while (letra < 65 || (letra > 90 && letra < 97) || letra>122) {        // Condiciones de introducir una letra mayus o minus.
+		while (letra < 65 || (letra > 90 && letra < 97) || letra>122) {            // Condiciones de introducir una letra mayus o minus.
 			printf("Por favor, introduzca un caracter valido.");
 			scanf("%c", &letra);
 			//getchar();
@@ -184,18 +186,20 @@ int main(void) {
 
 		/*Comprobar si la letra introducida está en la palabra y completar los huecos*/
 		historial(letra, palabra, vector, largo, &flag, intentos);
-		//printf("%s\n",palabra);                                                      //CHECKS
-		//printf("%s\n",vector);                                                       //
+		
+		//printf("%s\n",palabra);                                                 //CHECKS
+		//printf("%s\n",vector);                                                  //
 
 		if (flag == 2)
 		{ 
 		    intentos++; 
+		    printf("LETRA INCORRECTA.");
 			printf("\n\n%s\n\n", ahorcado[intentos]);                             //imprimimos un ahorcado.
 			
 			if (intentos >= NUM_INTENTOS)
 			{
 				printf("Se acabo, ha muerto ahorcado.\n");
-				printf("La palabra que usted debia adivinar es %s.\n", palabra);  //CAMBIO GITHUB
+				printf("La palabra correcta era %s.\n", palabra);                 //CAMBIO GITHUB
 				break;                                                            //acabar el juego sale del while
 			}
 			switch (intentos) {
@@ -209,6 +213,7 @@ int main(void) {
 		{   
 		if (intentos>0)
 		   {
+		   	printf("LETRA CORRECTA.");
 		    printf("\n\n%s\n\n", ahorcado[intentos]); 
 	       }
 			printf("Bien hecho!\n");
@@ -229,7 +234,7 @@ int main(void) {
 /*     FUNCIONES      */
 
 void titulo() {
-	/*  Logo en ascii  */
+
 	printf("\n\n\n");
 	printf("     \333\333\333       \333\333\260 \333\333   \260\333\333\333\333   \333\333\337\333\333\333   \334\333\333\333\334    \334\334\334      \261\333\333\333\333\333\334  \260\333\333\333\333\333  \n");
 	printf("    \260\333\333\333\333\334    \261\333\333\260 \333\333\260\260\333\333\260  \333\333\260\261\333\333 \260 \333\333\260\260\333\333\337 \337\333  \260\333\333\333\333\334    \260\333\333\337 \333\333\333\260\333\333\260  \333\333\260\n");
@@ -321,8 +326,8 @@ void historial(char letra, char *palabra, char* vector, int largo, int* flag, in
 
 	//comprobar si hemos ganado y final del juego.
 	int final = 1;
-	for (j = 0; j < largo - 1; j++) {// para que no llegue al \0 ya que al ser distinto de mayuscula imprimiría guión
-		if (*(vector + j) == *(palabra + j)) final = final * 1;
+	for (j = 0; j < largo - 1; j++) {      // para que no llegue al \0 ya que al ser distinto de mayuscula imprimiría un guión
+		if (*(vector + j) == *(palabra + j)) final = final * 1;   //proceso equivalente a stringcompare.
 		else final = final * 0;
 	}
 	if (final == 1) {
