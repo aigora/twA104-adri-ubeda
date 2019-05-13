@@ -1,39 +1,41 @@
-Archivo de texto en el cual escribiremos la explicaciÛn del trabajo hasta que estÈ terminado, que pasar· a formato PDF.
+Archivo de texto en el cual escribiremos la explicaci√≥n del trabajo hasta que est√© terminado, que pasar√° a formato PDF.
 
-Inicio: Un menu donde explique las reglas del ahorcado y el funcionamiento del programa.*avanzado:*El programa tendr· 
-dos modos, uno single player y otro cooperativo.
-El modo single player consistira en adivinar una palabra aleatoria, (dirigida por una funcion de elegir la palabra entre 
-una bateria de varias).
-En el modo cooperativo el usuario introducir· su propia palabra.
-*avanzado* que el menu tenga una interfaz agradable a la vista y la eleccion del modo sea din·mica con algun tipo de 
-animaciÛn ademas de algun tipo de imagen en el inicio en si.
+Inicio: Al ejecutar el programa, nos imprime por pantalla el t√≠tulo del ahorcado, formado de un modo que resulta est√©tico, usando simbolos de la tabla ascii.
+
+Introducci√≥n: aparece un menu donde explique las reglas del ahorcado y el funcionamiento del programa.
+
+Menus: El programa tendr√° dos modos, uno single player y otro cooperativo, que se podr√°n elegir utilizando las flechas "up" y "down".
+- El modo single player consistir√° en adivinar una palabra aleatoria, (dirigida por una funcion de elegir la palabra entre una bateria de varias).
+- En el modo cooperativo el usuario 1 introducir√° su propia palabra y el usuario 2 tendr√° que adivinarla.
+
 
 Contenido:
-Bucle en el main donde ocurre el programa.
-Funcion de dejar toda la palabra con guiones (guiones).
-Funcion de cambiar las letras introducidas en los guiones correspondientes.
-Funcion de dejar las letras que han introducido y son incorrectas.
-Dibujo del ahorcado por fases ( hay que incluir todas las imagenes de las distintas etapas del hombre 
-ahorcado para luego imprimirlas por pantalla).
+- Bucle en el main donde ocurre el programa.
+- Funcion que imprime el titulo.
+- Funcion que imprime el menu 0.
+- Funcion que imprime el menu 1
+- Funcion de dejar toda la palabra con guiones (guiones).
+- Funcion que comprueba si la letra introducida est√° en la palabra y completa los huecos.
+- Dibujo del ahorcado por fases (en funci√≥n del numero de errores imprime una u otra secuencia de caracteres).
 
 Funcionamiento (linea compiladora.)
 [...]
-[...]En la parte cooperativa el usuario introduce una palabra la cual se traslada a un vector con asignaciÛn dinamica
+[...]En la parte cooperativa el usuario 1 introduce una palabra la cual se traslada a un vector con asignaci√≥n dinamica
 de memoria y se borra el anterior vector para dejar esa memoria libre.
-A continuaciÛn con la funciÛn GUIONES se generara un vector de la misma longitud que solo incluir· guiones a modo de
+A continuaci√≥n con la funci√≥n GUIONES se generara un vector de la misma longitud que solo incluir√° guiones a modo de
 pista.
-Inicializamos un vector con asignaciÛn dinamica de memoria que actualizar· su contenido a medida que el usuario va 
-introduciendo letras a traves de un bucle, las cuales se convierten automaticamente en May˙sculas y adem·s descarta 
-los car·cteres no v·lidos.
+Inicializamos un vector con asignaci√≥n dinamica de memoria que actualizar√° su contenido a medida que el usuario va 
+introduciendo letras a traves de un bucle, las cuales se convierten automaticamente en May√∫sculas y adem√°s descarta 
+los car√°cteres no v√°lidos.
 El vector se llena con el objetivo de formar una cadena igual a la introducida al principio, y nos sirve para mostrar
-al usuario las letras que lleva acertadas y los huecos que quedan por adivinar. Esto ocurre en la funciÛn HISTORIAL,
+al usuario las letras que lleva acertadas y los huecos que quedan por adivinar. Esto ocurre en la funci√≥n HISTORIAL,
 en la que pasamos como parametros la letra que introduce el usuario, el puntero al inicio de la cadena PALABRA, que
-es la introducida al principio, el puntero al inicio de la cadena VECTOR, la longitud de la palabra y la direcciÛn de
+es la introducida al principio, el puntero al inicio de la cadena VECTOR, la longitud de la palabra y la direcci√≥n de
 memoria de un flag tipo entero.
-La funciÛn se limita a sustituir la letra por su espacio en el vector si coincide y un guiÛn si no y permite que sepamos
-si hemos fallado o acertado gracias al flag. La funciÛn no retorna nada porque es de tipo de paso por referencia.
+La funci√≥n se limita a sustituir la letra por su espacio en el vector si coincide y un gui√≥n si no y permite que sepamos
+si hemos fallado o acertado gracias al flag. La funci√≥n no retorna nada porque es de tipo de paso por referencia.
 Para saber si hemos ganado compara una vez los caracteres de cada cadena y si coinciden sale del programa con un mensaje
-de felicitaciÛn y si se acaban los intentos, lo hace de igual manera con otro mensaje.
+de felicitaci√≥n y si se acaban los intentos, lo hace de igual manera con otro mensaje.
 
 
 
