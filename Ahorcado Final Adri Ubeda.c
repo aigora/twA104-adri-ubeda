@@ -11,6 +11,19 @@
 #define ABAJO 80+256
 #define INTRO 13
 
+#define _CRT_SECURE_NO_WARNINGS  //Evitar la sintaxis de la versión.
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>               //strlen() y strcmp()
+#include<conio.h>                //_getch
+#include<time.h>                 //rand() y srand()
+
+/* Direcciones del teclado */
+#define ARRIBA 72+256
+#define ABAJO 80+256
+#define INTRO 13
+
 #define NUM_PALABRAS 16           //Numero de palabras 
 #define MAX_STRING 20            //Longitud máxima de la cadena inicial.
 #define NUM_INTENTOS 5           //Número de intentos, en el ahorcado clásico suelen ser 6. Se puede cambiar aquí.
@@ -71,8 +84,8 @@ int main(void) {
 		/* Initialize words to be chosen*/
 		srand(time(NULL)); //cambiar la seed de aleatoriedad.
 		char *bateria[] = { "CAMION","PUENTE","COCODRILO","SAPO","SOMBRERO","DELEGADO","HELADO","LATA","PELOTA","PIMIENTO","AGUA",
-		                    "CHOCOLATE","HIPOPOTAMO","APROBAR","TRABAJO","INFORMATICA"};
-		int aleatorio = rand() % ((NUM_PALABRAS-1) + 1); 
+							"CHOCOLATE","HIPOPOTAMO","APROBAR","TRABAJO","INFORMATICA" };
+		int aleatorio = rand() % ((NUM_PALABRAS - 1) + 1);
 		//ESTRUCTURA RARA PARA QUE genere entre 0 1 2 3 4 y no entre 1 2 3 4 5 (en el caso de 5)
 
 		largo = strlen(bateria[aleatorio]) + 1;
@@ -115,7 +128,7 @@ int main(void) {
 				*(palabra + i) = *(palabra + i) - 32;
 		}
 		printf("La palabra ya ha sido introducida por el Jugador 1. Buena suerte!.\n\n");
-		
+
 		//printf("%d",strlen(palabra));                                 //check
 	}//Fin de codigo exclusivo para Dos Jugadores.
 
@@ -133,7 +146,7 @@ int main(void) {
 	/* Inicializamos las fases del ahorcado */
 
 	char *ahorcado[] = {
-	                 " ",
+					 " ",
 					 "                                                                      |=====|\n"
 					 "                                                                            |\n"
 					 "                                                                            |\n"
@@ -174,12 +187,12 @@ int main(void) {
 		scanf("%c", &letra);
 		printf("\n");
 		getchar();
-		
+
 
 		while (letra < 65 || (letra > 90 && letra < 97) || letra>122) {            // Condiciones de introducir una letra mayus o minus.
 			printf("Por favor, introduzca un caracter valido.");
 			scanf("%c", &letra);
-			//getchar();
+			getchar();
 		}
 		system("cls");
 		//transformamos todas las letras a mayusculas                 
@@ -187,16 +200,16 @@ int main(void) {
 
 		/*Comprobar si la letra introducida está en la palabra y completar los huecos*/
 		historial(letra, palabra, vector, largo, &flag, intentos);
-		
+
 		//printf("%s\n",palabra);                                                 //CHECKS
 		//printf("%s\n",vector);                                                  //
 
 		if (flag == 2)
-		{ 
-		    intentos++; 
-		    printf("LETRA INCORRECTA.");
+		{
+			intentos++;
+			printf("LETRA INCORRECTA.");
 			printf("\n\n%s\n\n", ahorcado[intentos]);                             //imprimimos un ahorcado.
-			
+
 			if (intentos >= NUM_INTENTOS)
 			{
 				printf("Se acabo, ha muerto ahorcado.\n");
@@ -211,20 +224,20 @@ int main(void) {
 			}
 		}
 		if (flag == 1)
-		{   
-		if (intentos>0)
-		   {
-		   	printf("LETRA CORRECTA.");
-		    printf("\n\n%s\n\n", ahorcado[intentos]); 
-	       }
+		{
+			if (intentos > 0)
+			{
+				printf("LETRA CORRECTA.");
+				printf("\n\n%s\n\n", ahorcado[intentos]);
+			}
 			printf("Bien hecho!\n");
 		}
 		/* Reseteamos el valor de la flag para que vuelva al bucle */
 		flag = 0;
-	
+
 
 	}
-	
+
 
 	system("pause");
 	free(palabra); // a veces da fallo, estudiar.
@@ -276,7 +289,7 @@ void menu1()
 }
 
 void guiones(int largo) {
-	int i = 0;                      
+	int i = 0;
 	printf("\n\n");
 	printf("Adivina la palabra:                 ");
 	for (i = 1; i < largo; i++) {
@@ -287,7 +300,7 @@ void guiones(int largo) {
 }
 
 void historial(char letra, char *palabra, char* vector, int largo, int* flag, int intentos) {
-	int i, j, aciertos=0; //para ver si hay al menos un acierto y asi cambiar el flag CAMBIO GITHUB
+	int i, j, aciertos = 0; //para ver si hay al menos un acierto y asi cambiar el flag CAMBIO GITHUB
 	for (i = 0; i < largo; i++) {
 		if (letra == *(palabra + i)) {
 			/*
@@ -332,16 +345,19 @@ void historial(char letra, char *palabra, char* vector, int largo, int* flag, in
 		else final = final * 0;
 	}
 	if (final == 1) {
-		if(intentos==0) printf("Enhorabuena, has salvado al ahorcado sin fallos");
+		if (intentos == 0) printf("Enhorabuena, has salvado al ahorcado sin fallos");
 		else
 		{
-		printf("\n\nEnhorabuena, has salvado al ahorcado con %d fallo", intentos);
-		if(intentos>1) printf("s");
-		printf("!!\n\n");
+			printf("\n\nEnhorabuena, has salvado al ahorcado con %d fallo", intentos);
+			if (intentos > 1) printf("s");
+			printf("!!\n\n");
+			system("pause>>null \n\n"); //Paramos el programa sin mensaje.
+			exit(0);
 		}
-    
+
 		system("PAUSE");
 	}
 
 	return;
 }
+
